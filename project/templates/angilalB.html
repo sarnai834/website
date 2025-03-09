@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Жолооны тест</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #e3f2fd; /* Light blue background */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      color: #0277bd; /* Blue text color */
+    }
+    p {
+      font-size: 18px;
+      color: #0277bd; /* Blue text color */
+    }
+    .question {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #bbdefb; /* Light blue for questions */
+      border-radius: 8px;
+    }
+    label {
+      font-size: 16px;
+      color: #0277bd; /* Blue text color */
+      display: block;
+      margin: 5px 0;
+    }
+    .question span {
+      font-size: 14px;
+      margin-top: 10px;
+      display: block;
+    }
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+    .incorrect {
+      color: red;
+      font-weight: bold;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      color: #0277bd; /* Blue text color */
+    }
+    #timer {
+      font-size: 20px;
+      color: red;
+      font-weight: bold;
+    }
+    button {
+      background-color: #0288d1; /* Blue button color */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #0277bd; /* Darker blue on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Жолооны тест</h1>
+
+    <!-- Time Limit -->
+    <p>Хугацаа: <span id="timer">01:00</span> минут</p>
+
+    <!-- Асуултууд -->
+    <div class="question" id="question-1">
+      <p>1. Гэрэл дохионы улаан гэрэл дээр жолооч юу хийх ёстой вэ?</p>
+      <label><input type="radio" name="q1" value="A"> Зогсох</label>
+      <label><input type="radio" name="q1" value="B"> Үргэлжлүүлэн явах</label>
+      <label><input type="radio" name="q1" value="C"> Хурдаа нэмэх</label>
+      <span id="result-q1"></span> <!-- Result will appear here -->
+    </div>
+
+    <div class="question" id="question-2">
+      <p>2. Зам дээрх явган хүний гарцын тэмдэг дээр юу хийх ёстой вэ?</p>
+      <label><input type="radio" name="q2" value="A"> Түргэн өнгөрөх</label>
+      <label><input type="radio" name="q2" value="B"> Зогсох</label>
+      <label><input type="radio" name="q2" value="C"> Тэмдгийг үл тоох</label>
+      <span id="result-q2"></span> <!-- Result will appear here -->
+    </div>
+
+    <!-- Хариулт шалгах товч -->
+    <button onclick="checkAnswers()">Хариултаа шалгах</button>
+
+    <!-- Хариултын үр дүн -->
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    // Зөв хариултууд
+    const correctAnswers = {
+      q1: "A", // Зогсох
+      q2: "B"  // Зогсох
+    };
+
+    let timeLeft = 60; // 60 seconds timer
+    const timerElement = document.getElementById("timer");
+
+    // Countdown Timer
+    const timerInterval = setInterval(function() {
+      if (timeLeft > 0) {
+        timeLeft--;
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerElement.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      } else {
+        clearInterval(timerInterval); // Stop the timer when time is up
+        alert("Цаг дууссан байна! Тестийг илгээх болно.");
+        checkAnswers(); // Automatically submit answers when time is up
+      }
+    }, 1000);
+
+    function checkAnswers() {
+      clearInterval(timerInterval); // Stop the timer immediately when checking answers
+      let score = 0; // Оноо
+      let totalQuestions = Object.keys(correctAnswers).length; // Нийт асуулт
+
+      // Хариултыг шалгах
+      for (let question in correctAnswers) {
+        const selected = document.querySelector(`input[name="${question}"]:checked`);
+        const resultSpan = document.getElementById(`result-${question}`);
+
+        // If user selects an answer
+        if (selected) {
+          if (selected.value === correctAnswers[question]) {
+            resultSpan.innerHTML = `<span class="correct">Зөв</span>`;
+            score++;
+          } else {
+            resultSpan.innerHTML = `
+              <span class="incorrect">Буруу</span> 
+              (Зөв хариулт: ${correctAnswers[question] === "A" ? "Зогсох" : "Зогсох"})
+            `;
+          }
+        } else {
+          resultSpan.innerHTML = `<span class="incorrect">Хариулт оруулаагүй</span>`;
+        }
+      }
+
+      // Нийт оноо харуулах
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = `<p>Таны оноо: ${score} / ${totalQuestions}</p>`;
+    }
+  </script>
+</body>
+</html>

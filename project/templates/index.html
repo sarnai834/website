@@ -1,0 +1,154 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Авто Сургуулийн Дүрмийн Тест</title>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <style>
+    /* Reset Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body Styling */
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation Bar Styling */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #005b96;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .heading {
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin: 0 15px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .nav-links a:hover {
+      background-color: #003f63;
+      transform: scale(1.1);
+    }
+
+    .nav-links a.active {
+      background-color: #007bb5;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Content Container */
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      margin: 50px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .container:hover {
+      transform: scale(1.01);
+      box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
+    }
+
+    h1 {
+      text-align: center;
+      color: #005b96;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    th {
+      background-color: #007bb5;
+      color: white;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #d0ebff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    td a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    td a:hover {
+      color: #005b96;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="heading">Монгол Улсын Мэргэшсэн Жолоочийн Тест</div>
+    <ul class="nav-links">
+      <li><a href="/login">Нэвтрэх</a></li> <!-- Login Button -->
+      <li><a href="/logout">Гарах</a></li> <!-- Logout Button -->
+    </ul>
+  </nav>
+ 
+  </div>
+</body>

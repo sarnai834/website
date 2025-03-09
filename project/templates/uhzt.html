@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Улс хоорондын Зорчигч Тээврийн Асуулт</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .timer {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .submit-btn {
+            background-color: #1d3557;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #457b9d;
+        }
+        .score {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #2a9d8f;
+            font-weight: bold;
+        }
+        .error-message {
+            font-size: 16px;
+            color: #e63946;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .view-error-btn {
+            background-color: #e63946;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .view-error-btn:hover {
+            background-color: #d23a33;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="timer" id="timer">Үлдсэн хугацаа: 1 минут 0 секунд</div>
+        <form id="quiz-form">
+            <div class="question">
+                <p>1. Улс хоорондын зорчигч тээвэрлэлтийн хамгийн чухал баримт бичиг юу вэ?</p>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="answer1" value="a"> A. Зорчигчийн эрхийн баталгаа</label>
+                <label><input type="radio" name="answer1" value="b"> B. Аялалын тасалбар</label>
+                <label><input type="radio" name="answer1" value="c"> C. Хилээр гарах зөвшөөрөл</label>
+            </div>
+            <div class="question">
+                <p>2. Улс хоорондын зорчигч тээвэрлэлтийн бүртгэл ямар байгууллагаар хийгддэг вэ?</p>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="answer2" value="a"> A. Зорчигчийн тээврийн агентлаг</label>
+                <label><input type="radio" name="answer2" value="b"> B. Гаалийн алба</label>
+                <label><input type="radio" name="answer2" value="c"> C. Тээвэрлэлтийн хяналтын алба</label>
+            </div>
+            <div class="question">
+                <p>3. Зорчигчийн аюулгүй байдлыг хангах хамгийн чухал арга юу вэ?</p>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="answer3" value="a"> A. Зорчигчийг бүртгэх</label>
+                <label><input type="radio" name="answer3" value="b"> B. Хил дамжин өнгөрөх зөвшөөрөл</label>
+                <label><input type="radio" name="answer3" value="c"> C. Аюулгүй байдлын шалгалт хийх</label>
+            </div>
+            <div class="question">
+                <p>4. Улс хоорондын зорчигч тээвэрлэлтийн ачааллыг хамгийн ихэд нөлөөлдөг хүчин зүйл юу вэ?</p>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="answer4" value="a"> A. Агаарын урсгал</label>
+                <label><input type="radio" name="answer4" value="b"> B. Зорчигчдын тоо</label>
+                <label><input type="radio" name="answer4" value="c"> C. Ачаа тээвэр</label>
+            </div>
+            <div class="question">
+                <p>5. Зорчигчийн нислэгийн тасалбарыг буцаах шаардлагатай бол юу хийх ёстой вэ?</p>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="answer5" value="a"> A. Аялалын компаниас зөвшөөрөл авах</label>
+                <label><input type="radio" name="answer5" value="b"> B. Хувийн тээвэрлэгчтэй тохиролцох</label>
+                <label><input type="radio" name="answer5" value="c"> C. Тасалбарыг үндсэн тээвэрлэлтийн төвд буцаах</label>
+            </div>
+            <button type="submit" class="submit-btn">Хариу илгээх</button>
+        </form>
+        <div class="score" id="score">Оноо: 0</div>
+        <div id="error-message" class="error-message" style="display: none;">Та зөв хариултыг харна уу!</div>
+        <button id="view-error-btn" class="view-error-btn" style="display: none;" onclick="viewError()">Зөв хариултыг харах</button>
+    </div>
+
+    <script>
+        let timeLeft = 60;
+        let score = 0;
+        const timerElement = document.getElementById('timer');
+        const scoreElement = document.getElementById('score');
+        const errorMessageElement = document.getElementById('error-message');
+        const viewErrorButton = document.getElementById('view-error-btn');
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes} минут ${remainingSeconds} секунд`;
+        }
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = `Үлдсэн хугацаа: ${formatTime(timeLeft)}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                alert('Хугацаа дууслаа! Таны оноо: ' + score);
+                document.getElementById('quiz-form').reset();
+            }
+        }, 1000);
+
+        const form = document.getElementById('quiz-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            clearInterval(countdown);
+            score = 0; // Reset score for each question
+            let correctAnswers = 0;
+
+            // Check answers
+            if (form.answer1.value === 'b') correctAnswers++;
+            if (form.answer2.value === 'a') correctAnswers++;
+            if (form.answer3.value === 'c') correctAnswers++;
+            if (form.answer4.value === 'b') correctAnswers++;
+            if (form.answer5.value === 'c') correctAnswers++;
+
+            score = correctAnswers;  // Update score
+            scoreElement.textContent = `Оноо: ${score}`;
+            
+            if (correctAnswers === 5) {
+                alert('Та бүх асуултанд зөв хариулсан байна!');
+            } else {
+                alert('Таны оноо: ' + correctAnswers + ' / 5');
+            }
+            
+            // Show error message if any incorrect answers
+            if (correctAnswers < 5) {
+                errorMessageElement.style.display = 'block';
+                viewErrorButton.style.display = 'block';
+            } else {
+                errorMessageElement.style.display = 'none';
+                viewErrorButton.style.display = 'none';
+            }
+        });
+
+        function viewError() {
+            alert('Зөв хариултууд:\n1. B\n2. A\n3. C\n4. B\n5. C');
+        }
+    </script>
+</body>
+</html>

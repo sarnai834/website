@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E Ангиллын Жолооны Тест</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #e3f2fd; /* Light blue background */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      color: #0277bd; /* Blue text color */
+    }
+    .question {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #bbdefb; /* Light blue for questions */
+      border-radius: 8px;
+    }
+    label {
+      font-size: 16px;
+      color: #0277bd; /* Blue text color */
+      display: block;
+      margin: 5px 0;
+    }
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+    .incorrect {
+      color: red;
+      font-weight: bold;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      color: #0277bd; /* Blue text color */
+    }
+    button {
+      background-color: #0288d1; /* Blue button color */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #0277bd; /* Darker blue on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>E Ангиллын Жолооны Тест</h1>
+
+    <!-- Асуултууд -->
+    <div class="question" id="question-1">
+      <p>1. Ямар үед жолооч анхааралтай байж, бүрэн зогсох ёстой вэ?</p>
+      <label><input type="radio" name="q1" value="A"> Гэрэл дохио улаан болох үед</label>
+      <label><input type="radio" name="q1" value="B"> Жолоочийн амрах үед</label>
+      <label><input type="radio" name="q1" value="C"> Гудамжны зөвшөөрөлтэй хэсэгт</label>
+      <span id="result-q1"></span>
+    </div>
+
+    <div class="question" id="question-2">
+      <p>2. Хөдөлгөөний хугацаа дуусахад жолооч юу хийх ёстой вэ?</p>
+      <label><input type="radio" name="q2" value="A"> Хурдаа нэмэх</label>
+      <label><input type="radio" name="q2" value="B"> Хөдөлгөөний нөхцөлд тохируулах</label>
+      <label><input type="radio" name="q2" value="C"> Зогсох</label>
+      <span id="result-q2"></span>
+    </div>
+
+    <!-- Хариулт шалгах товч -->
+    <button onclick="checkAnswers()">Хариултаа шалгах</button>
+
+    <!-- Хариултын үр дүн -->
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    // Зөв хариултууд
+    const correctAnswers = {
+      q1: "A", // Гэрэл дохио улаан болох үед
+      q2: "B"  // Хөдөлгөөний нөхцөлд тохируулах
+    };
+
+    const answerText = {
+      q1: {
+        A: "Гэрэл дохио улаан болох үед",
+        B: "Жолоочийн амрах үед",
+        C: "Гудамжны зөвшөөрөлтэй хэсэгт"
+      },
+      q2: {
+        A: "Хурдаа нэмэх",
+        B: "Хөдөлгөөний нөхцөлд тохируулах",
+        C: "Зогсох"
+      }
+    };
+
+    function checkAnswers() {
+      let score = 0; // Оноо
+      let totalQuestions = Object.keys(correctAnswers).length; // Нийт асуулт
+
+      // Хариултыг шалгах
+      for (let question in correctAnswers) {
+        const selected = document.querySelector(`input[name="${question}"]:checked`); // Fixed the querySelector syntax
+        const resultSpan = document.getElementById(`result-${question}`); // Fixed the resultSpan id syntax
+
+        if (selected) {
+          if (selected.value === correctAnswers[question]) {
+            resultSpan.innerHTML = `<span class="correct">Зөв. Та зөв хариулсан: ${answerText[question][selected.value]}</span>`; // Correct answer
+            score++;
+          } else {
+            resultSpan.innerHTML = `<span class="incorrect">Буруу. Зөв хариулт: ${answerText[question][correctAnswers[question]]}</span>`; // Incorrect answer with correct answer displayed
+          }
+        } else {
+          resultSpan.innerHTML = `<span class="incorrect">Хариулт оруулаагүй</span>`; // No answer selected
+        }
+      }
+
+      // Нийт оноо харуулах
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = `<p>Таны оноо: ${score} / ${totalQuestions}</p>`;
+    }
+  </script>
+</body>
+</html>
